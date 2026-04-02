@@ -1,0 +1,193 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About Us",
+    "contact": "Contact",
+    "montenegro": "Montenegro",
+    "blackGold": "Black Gold Collection",
+    "blueGold": "Blue Gold Collection",
+    "redGold": "Red Gold Collection",
+    "whiteGold": "White Gold Collection"
+  },
+  "Home": {
+    "heroBadge": "Premium Hand Rolled",
+    "heroTitle": "Black Gold",
+    "heroEdition": "Edition",
+    "heroDesc": "Crafted for the modern gentleman. A century of tradition in every puff, melding robust tobacco with a smooth crimson finish.",
+    "explore": "Explore Collection",
+    "about": "About Us",
+    "traditionTitle": "100 Years of\nCigar Tradition",
+    "traditionDesc": "Welcome to Kilau Cigar Indonesia, where elegance meets masculinity in the world of cigars. We invite you to explore the incomparable beauty of the art of smoking.",
+    "legacyTitle": "LEGACY",
+    "legacySubtitle": "Authentic Tobacco",
+    "legacyDesc": "A legacy of flavor that transcends time. Every single one of our cigars tells a century-old story shaped by expert hands, resulting in an unmatched symphony of flavor in every puff.",
+    "ctaFind": "Find Our Collection",
+    "differenceTitle": "Experience\nThe Difference",
+    "differenceDesc": "We do everything the traditional way, from ox-drawn plows to hand-picking by our team over months, to hand-sewn leaves hung to dry. All through the process of fermentation, leaf stripping, sorting, aging, rolling, to the perfect cigar finish.",
+    "smokingExp": "Ultimate\nSmoking Experience",
+    "smokingDesc": "The luxurious gold label Montenegro Selección Privada is paired with Blue, Black, White & Red bands wrapping perfectly rolled, aromatic hand-made cigars.",
+    "recommended": "Recommended\nCigar Products",
+    "shipping": "Immediate Shipping",
+    "quality": "Finest Tobacco Quality",
+    "years": "11 years in the market"
+  },
+  "Footer": {
+    "description": "Kilau Cigar Indonesia provides the ultimate premium experience for cigar aficionados worldwide. Artisanally crafted, traditionally aged, and hand-rolled to perfection.",
+    "contactInfo": "Contact Information",
+    "quickLinks": "Quick Links",
+    "office": "Office",
+    "officeLocation": "Jakarta, Indonesia",
+    "copyright": "© 2026 Kilau Cigar Indonesia. All rights reserved.",
+    "madeBy": "Crafted with Precision by KCI Heritage",
+    "whatsappWidget": "Contact Our Expert",
+    "privacy": "Privacy Policy",
+    "shipping": "Shipping Policy",
+    "terms": "Terms of Service",
+    "faq": "FAQ"
+  },
+  "Common": {
+    "details": "Product Details",
+    "explore": "Explore Collection",
+    "back": "Back",
+    "submit": "Send Message",
+    "loading": "Loading...",
+    "all": "All"
+  },
+  "Products": {
+    "title": "Cigar",
+    "subtitle": "Collection",
+    "description": "Discover our finest premium cigar selection. From the deep Black Gold collection to the elegance of White Gold, every piece is a masterpiece of tobacco art.",
+    "noProducts": "No products found in this category."
+  },
+  "Montenegro": {
+    "series": "Montenegro Series",
+    "viewAll": "View All Collection",
+    "available": "Available in",
+    "seri": "this Series",
+    "noProducts": "No products available for this collection yet.",
+    "black-gold": {
+      "title": "Montenegro's Choice\nBlack Gold Collection",
+      "desc": "It is important for us to emphasize that every step in the creation of our cigars is done with full dedication, from the selection of the tobacco to the skilled hands that wrap it. Montenegro is a symbol of our pride, a masterpiece born of long tradition."
+    },
+    "blue-gold": {
+      "title": "Montenegro's Choice\nBlue Gold Collection",
+      "desc": "The Blue Gold collection presents a perfect blend of strength and softness. Each stick is designed to provide a calm yet deep smoking experience for true connoisseurs who appreciate the dedication in every leaf of tobacco."
+    },
+    "red-gold": {
+      "title": "Montenegro's Choice\nRed Gold Collection",
+      "desc": "Red Gold is a celebration of tradition and passion. We believe that human craftsmanship gives a unique touch to every leaf of tobacco that is meticulously assembled to create a rich aroma and bold character."
+    },
+    "white-gold": {
+      "title": "Montenegro's Choice\nWhite Gold Collection",
+      "desc": "Purity and elegance radiate from every leaf of tobacco in the White Gold collection. We are certain that human dedication provides a light yet memorable flavor complexity, weaving a masterpiece in every stick of cigar."
+    }
+  },
+  "Contact": {
+    "title": "Exclusive",
+    "subtitle": "Ordering",
+    "formTitle": "Order Form",
+    "formDesc": "Please fill in the details below to place your order via WhatsApp.",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "WhatsApp Number",
+    "quantityLabel": "Quantity (Sticks/Box)",
+    "address": "Full Address",
+    "message": "Additional Message (Optional)",
+    "submit": "Send Order (WhatsApp)",
+    "selectionLabel": "Select Product",
+    "quantityPlaceholder": "Example: 1 Box or 5 Sticks",
+    "success": "Your message is ready! Please click 'Send' on WhatsApp.",
+    "companyInfo": "Kilau Cigar Indonesia presents the finest premium experience with exclusive after-sales service."
+  },
+  "About": {
+    "badge": "About Us",
+    "heritage": "Kilau Cigar Indonesia",
+    "tagline": "\"Welcome to Kilau Cigar Indonesia, where cigar beauty and excellence unite in every enjoyment. Since our founding, we have been committed to presenting the best cigar experience, blending robust tobacco traditions with modern innovation.\"",
+    "historyBadge": "Brief History",
+    "historyTitle": "A Journey",
+    "historySubtitle": "Full of Challenges",
+    "historyDesc1": "Founded in 2023, Kilau Cigar Indonesia began with a passion for bringing high-quality cigars to tobacco lovers worldwide.",
+    "historyDesc2": "Through a challenging journey, we have grown into a recognized industry leader, continuing to combine traditional wisdom with modern excellence.",
+    "experienceTitle": "The Ultimate Cigar Experience",
+    "experienceDesc": "Our ultimate pride is when every cigar lover finds true joy in every puff. From classic cigars to exclusive creations, every product is a labor of love for those who appreciate the art of smoking.",
+    "nicaraguaTitle": "Nicaraguan Cigar Background",
+    "nicaraguaDesc": "Nicaragua, with its fertile soil and ideal climate, has become the birthplace of some of the world's best cigars. Nicaraguan tobacco is known for its diversity, providing unique notes of earth, cinnamon, and chocolate to the cigar.",
+    "innovationTitle": "Innovation",
+    "innovationSubtitle": "Enjoying Cigars",
+    "innovationDesc": "We proudly incorporate Nicaraguan tobacco expertise into our collections, delivering a distinguished and authentic smoking experience.",
+    "quote": "Continuously creating inspiring cigar experiences through relentless innovation and creation.",
+    "qualityTitle": "Kilau Cigar Indonesia",
+    "qualitySubtitle": "Always Providing the Best Cigars",
+    "qualityDesc": "Presenting high-quality cigars from around the world, carefully selected to ensure true enjoyment for cigar enthusiasts wherever they are."
+  },
+  "ProductSpecs": {
+    "length": "Length",
+    "ring": "Ring Gauge",
+    "shape": "Shape",
+    "strength": "Strength",
+    "wrapper": "Wrapper",
+    "binder": "Binder",
+    "filler": "Filler",
+    "size": "Size",
+    "box": "Packaging"
+  },
+  "ProductsData": {
+    "comandate-series-e": {
+      "shortDesc": "The pinnacle of luxury in every puff, an ultra-premium series for true connoisseurs.",
+      "description": "Comandate Series E is a masterpiece of the Black Gold collection. Designed to provide a deep experience with a complex flavor profile and captivating aroma evolution from start to finish."
+    },
+    "gran-torpedo-series-e": {
+      "shortDesc": "Elegant torpedo shape with a sharp and focused flavor character.",
+      "description": "Gran Torpedo Series E offers a unique intensity thanks to its tapered tip, concentrating the smoke flow for a richer flavor."
+    },
+    "toro-especial-serie-f": {
+      "shortDesc": "Perfect balance between strength and aromatic smoothness.",
+      "description": "Serie F brings a new interpretation of the classic Toro size. With a slow and consistent burn, this cigar reveals notes of cedar wood."
+    },
+    "toro-especial-serie-s": {
+      "shortDesc": "The mysterious Serie S, dominated by rich earthy flavors.",
+      "description": "Toro Especial Serie S is an exclusive variant of the Black Gold collection. Utilizing tobacco grown in volcanic soil."
+    },
+    "toro-special-aniv": {
+      "shortDesc": "A celebratory edition embodying a century of Montenegro tradition.",
+      "description": "Toro Special Anniversary was created in very limited quantities to commemorate this brand's milestone."
+    },
+    "grand-robusto-blue": {
+      "shortDesc": "Classic Robusto with a touch of modern luxury.",
+      "description": "Grand Robusto from the Blue Gold series is a favorite choice for those who want a perfect smoking duration."
+    },
+    "toro-blue": {
+      "shortDesc": "Legendary size for a relaxed yet classy smoking session.",
+      "description": "Toro Blue Gold provides an abundant smoke volume and a signature creamy flavor profile."
+    },
+    "torpedo-blue": {
+      "shortDesc": "Torpedo elegance with precise flavor focus.",
+      "description": "Torpedo Blue Gold combines perfect combustion with a concentrated smoke flow."
+    },
+    "cigarillos-red": {
+      "shortDesc": "Premium enjoyment in a compact format for your short moments.",
+      "description": "Cigarillos Red Gold brings Montenegro's premium tobacco quality into a smaller size."
+    },
+    "gorditto-red": {
+      "shortDesc": "Small but mighty, with a large ring gauge for a thick smoke character.",
+      "description": "Gorditto is all about volume. Despite its short length, its large ring gauge allows for a full smoking sensation."
+    },
+    "petit-corona-red": {
+      "shortDesc": "Classic proportions for a bold flavor.",
+      "description": "Petit Corona Red Gold is about intensity. With a smaller ring gauge, it highlights the wrapper aroma."
+    },
+    "bomba-white": {
+      "shortDesc": "A unique and unexpected flavor explosion, a limited collection for collectors.",
+      "description": "Bomba is designed to provide surprises at every stage of the burn."
+    },
+    "crucero-white": {
+      "shortDesc": "A symbol of flavor adventure across the tobacco oceans.",
+      "description": "Crucero presents a blend of tobacco from various regions."
+    },
+    "el-jefe-white": {
+      "shortDesc": "The Leader in its class, large size for long-lasting satisfaction.",
+      "description": "El Jefe (The Boss) is a cigar that demands attention. With its dominant size, it offers a long flavor journey."
+    }
+  }
+}

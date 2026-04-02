@@ -1,0 +1,193 @@
+{
+  "Navbar": {
+    "home": "Beranda",
+    "products": "Produk",
+    "about": "Tentang Kami",
+    "contact": "Kontak",
+    "montenegro": "Montenegro",
+    "blackGold": "Koleksi Black Gold",
+    "blueGold": "Koleksi Blue Gold",
+    "redGold": "Koleksi Red Gold",
+    "whiteGold": "Koleksi White Gold"
+  },
+  "Home": {
+    "heroBadge": "Lintingan Tangan Premium",
+    "heroTitle": "Black Gold",
+    "heroEdition": "Edisi",
+    "heroDesc": "Dibuat untuk pria modern. Warisan tradisi selama satu abad yang terwujud dalam setiap hisapan, perpaduan tembakau kokoh dengan sentuhan akhir merah crimson yang halus.",
+    "explore": "Jelajahi Koleksi",
+    "about": "Tentang Kami",
+    "traditionTitle": "100 Tahun\nTradisi Cerutu",
+    "traditionDesc": "Selamat datang di Kilau Cigar Indonesia tempat di mana keanggunan bertemu dengan kejantanan dalam dunia cigar. Kami mengundang Anda untuk menjelajahi keindahan seni merokok yang tak tertandingi.",
+    "legacyTitle": "WARISAN",
+    "legacySubtitle": "Tembakau Asli",
+    "legacyDesc": "Warisan cita rasa yang melampaui waktu. Setiap batang cerutu kami bercerita tentang tradisi satu abad yang dibentuk oleh tangan-tangan ahli, menghasilkan simfoni rasa yang tak tertandingi dalam setiap hisapan.",
+    "ctaFind": "Temukan Koleksi Kami",
+    "differenceTitle": "Rasakan\nPerbedaannya",
+    "differenceDesc": "Kami melakukan segalanya dengan cara tradisional, mulai dari bajak sawah yang ditarik lembu, hingga petikan tangan dari tim kami yang menghabiskan waktu berbulan-bulan, hingga daun-daun yang dijahit tangan dan digantung untuk dikeringkan. Semua melalui proses fermentasi, pembuangan tulang daun, penyortiran, penuaan, penggulungan, hingga penyelesaian cerutu yang sempurna.",
+    "smokingExp": "Pengalaman\nMerokok Terbaik",
+    "smokingDesc": "Label emas mewah Montenegro Selección Privada dipadukan dengan pita Biru, Hitam, Putih & Merah yang membungkus cerutu buatan tangan yang penuh aroma dan digulung dengan sempurna.",
+    "recommended": "Rekomendasi\nProduk Cerutu",
+    "shipping": "Pengiriman Segera",
+    "quality": "Tembakau Kualitas Terbaik",
+    "years": "11 tahun di pasar"
+  },
+  "Footer": {
+    "description": "Kilau Cigar Indonesia memberikan pengalaman premium terbaik bagi para penikmat cigar di seluruh dunia. Dibuat secara artisanal, dituakan secara tradisional, dan dilinting dengan tangan hingga sempurna.",
+    "contactInfo": "Informasi Kontak",
+    "quickLinks": "Tautan Cepat",
+    "office": "Kantor",
+    "officeLocation": "Jakarta, Indonesia",
+    "copyright": "© 2026 Kilau Cigar Indonesia. Hak cipta dilindungi undang-undang.",
+    "madeBy": "Dibuat dengan Presisi oleh Warisan KCI",
+    "whatsappWidget": "Hubungi Ahli Kami",
+    "privacy": "Kebijakan Privasi",
+    "shipping": "Kebijakan Pengiriman",
+    "terms": "Ketentuan Layanan",
+    "faq": "FAQ"
+  },
+  "Common": {
+    "details": "Detail Produk",
+    "explore": "Jelajahi Koleksi",
+    "back": "Kembali",
+    "submit": "Kirim Kontrak",
+    "loading": "Memuat...",
+    "all": "Semua"
+  },
+  "Products": {
+    "title": "Koleksi",
+    "subtitle": "Cigar",
+    "description": "Temukan pilihan cigar premium terbaik kami. Dari koleksi Black Gold yang mendalam hingga keanggunan White Gold, setiap batang adalah mahakarya seni tembakau.",
+    "noProducts": "Tidak ada produk dalam kategori ini."
+  },
+  "Montenegro": {
+    "series": "Montenegro Series",
+    "viewAll": "Lihat Semua Koleksi",
+    "available": "Tersedia di",
+    "seri": "Seri ini",
+    "noProducts": "Produk belum tersedia untuk koleksi ini.",
+    "black-gold": {
+      "title": "Pilihan Montenegro\nBlack Gold Collection",
+      "desc": "Penting bagi kami untuk menekankan bahwa setiap langkah dalam pembuatan Cigar kami dilakukan dengan penuh dedikasi, dari pemilihan tembakau hingga tangan terampil yang membalutnya. Montenegro adalah simbol kebanggaan kami, sebuah mahakarya yang lahir dari tradisi panjang."
+    },
+    "blue-gold": {
+      "title": "Pilihan Montenegro\nBlue Gold Collection",
+      "desc": "Koleksi Blue Gold menghadirkan perpaduan sempurna antara kekuatan dan kelembutan. Setiap batang dirancang untuk memberikan pengalaman merokok yang tenang namun mendalam bagi para penikmat sejati yang menghargai dedikasi dalam setiap helai daun tembakau."
+    },
+    "red-gold": {
+      "title": "Pilihan Montenegro\nRed Gold Collection",
+      "desc": "Red Gold adalah perayaan tradisi dan semangat. Kami percaya bahwa keahlian tangan manusia memberikan sentuhan unik dalam setiap helai tembakau yang dirangkai dengan penuh dedikasi untuk menciptakan aroma yang kaya dan karakter yang berani."
+    },
+    "white-gold": {
+      "title": "Pilihan Montenegro\nWhite Gold Collection",
+      "desc": "Kemurnian dan keanggunan terpancar dari setiap helai tembakau dalam koleksi White Gold. Kami yakin bahwa dedikasi tangan manusia memberikan kompleksitas rasa yang ringan namun berkesan, merangkai mahakarya dalam setiap batang Cigar."
+    }
+  },
+  "Contact": {
+    "title": "Pemesanan",
+    "subtitle": "Eksklusif",
+    "formTitle": "Formulir Pemesanan",
+    "formDesc": "Silakan isi detail di bawah ini untuk melakukan pemesanan via WhatsApp.",
+    "name": "Nama Lengkap",
+    "email": "Alamat Email",
+    "phone": "Nomor WhatsApp",
+    "quantityLabel": "Jumlah (Batang/Box)",
+    "address": "Alamat Lengkap",
+    "message": "Pesan Tambahan (Opsional)",
+    "submit": "Kirim Pesanan (WhatsApp)",
+    "selectionLabel": "Pilih Produk",
+    "quantityPlaceholder": "Contoh: 1 Box atau 5 Batang",
+    "success": "Pesan Anda telah siap! Silakan klik 'Kirim' di WhatsApp.",
+    "companyInfo": "Kilau Cigar Indonesia menyajikan pengalaman premium terbaik dengan layanan purna jual yang eksklusif."
+  },
+  "About": {
+    "badge": "Tentang Kami",
+    "heritage": "Kilau Cigar Indonesia",
+    "tagline": "\"Selamat datang di Kilau Cigar Indonesia, tempat di mana keindahan dan keunggulan cerutu bersatu dalam setiap kenikmatan. Sejak pendirian kami, kami berkomitmen untuk menyajikan pengalaman cerutu terbaik, memadukan tradisi tembakau yang kokoh dengan inovasi modern.\"",
+    "historyBadge": "Sejarah Singkat",
+    "historyTitle": "Perjalanan",
+    "historySubtitle": "Penuh Tantangan",
+    "historyDesc1": "Didirikan pada tahun 2023, Kilau Cigar Indonesia berawal dari hasrat untuk membawa cerutu berkualitas tinggi kepada pecinta tembakau di seluruh dunia.",
+    "historyDesc2": "Melalui perjalanan yang penuh tantangan, kami telah tumbuh menjadi pemimpin industri yang diakui, terus menggabungkan kearifan tradisional dengan keunggulan modern.",
+    "experienceTitle": "Pengalaman Terbaik dengan Cerutu",
+    "experienceDesc": "Puncak kebanggaan kami adalah ketika setiap pecinta cerutu menemukan kebahagiaan sejati dalam setiap hirupan. Dari cerutu klasik hingga kreasi eksklusif, setiap produk kami adalah persembahan cinta untuk mereka yang menghargai seni merokok.",
+    "nicaraguaTitle": "Latar Belakang Cerutu Nicaragua",
+    "nicaraguaDesc": "Nicaragua, dengan tanah yang subur dan iklim yang ideal, telah menjadi tempat lahir bagi beberapa cerutu terbaik di dunia. Tembakau Nicaragua dikenal akan keberagamannya, memberikan nuansa bumi, kayu manis, dan cokelat yang unik pada cerutu.",
+    "innovationTitle": "Inovasi",
+    "innovationSubtitle": "Menikmati Cigar",
+    "innovationDesc": "Kami dengan proud memasukkan keahlian tembakau Nicaragua dalam koleksi kami, menghadirkan pengalaman merokok yang istimewa dan autentik.",
+    "quote": "Terus menciptakan pengalaman menikmati Cigar yang menginspirasi melalui inovasi dan kreasi tanpa henti.",
+    "qualityTitle": "Kilau Cigar Indonesia",
+    "qualitySubtitle": "Selalu Memberikan Cigar Terbaik",
+    "qualityDesc": "Menghadirkan cerutu berkualitas tinggi dari seluruh dunia, dipilih dengan cermat untuk memastikan kenikmatan sejati bagi para penikmat cerutu di manapun berada."
+  },
+  "ProductSpecs": {
+    "length": "Panjang",
+    "ring": "Ring Gauge",
+    "shape": "Bentuk",
+    "strength": "Kekuatan",
+    "wrapper": "Wrapper",
+    "binder": "Binder",
+    "filler": "Filler",
+    "size": "Ukuran",
+    "box": "Kemasan"
+  },
+  "ProductsData": {
+    "comandate-series-e": {
+      "shortDesc": "Puncak kemewahan dalam setiap hisapan, seri ultra-premium untuk penikmat sejati.",
+      "description": "Comandate Series E adalah mahakarya dari koleksi Black Gold. Dirancang untuk memberikan pengalaman yang mendalam dengan profil rasa yang kompleks dan evolusi aroma yang memikat dari awal hingga akhir."
+    },
+    "gran-torpedo-series-e": {
+      "shortDesc": "Bentuk torpedo yang elegan dengan karakter rasa yang tajam dan terfokus.",
+      "description": "Gran Torpedo Series E menawarkan intensitas yang unik berkat ujungnya yang meruncing, memusatkan aliran asap untuk rasa yang lebih pekat."
+    },
+    "toro-especial-serie-f": {
+      "shortDesc": "Keseimbangan sempurna antara kekuatan dan kelembutan aroma.",
+      "description": "Serie F menghadirkan interpretasi baru dari ukuran Toro klasik. Dengan pembakaran yang lambat dan konsisten, cigar ini mengungkapkan catatan kayu cedar."
+    },
+    "toro-especial-serie-s": {
+      "shortDesc": "Serie S yang misterius, dengan kekayaan rasa earthy yang mendominasi.",
+      "description": "Toro Especial Serie S adalah varian eksklusif dari koleksi Black Gold. Menggunakan tembakau yang ditanam di tanah vulkanik."
+    },
+    "toro-special-aniv": {
+      "shortDesc": "Edisi perayaan yang merangkum satu abad tradisi Montenegro.",
+      "description": "Toro Special Anniversary dibuat dalam jumlah yang sangat terbatas untuk memperingati tonggak sejarah brand ini."
+    },
+    "grand-robusto-blue": {
+      "shortDesc": "Klasik Robusto dengan sentuhan kemewahan modern.",
+      "description": "Grand Robusto dari seri Blue Gold adalah pilihan favorit bagi mereka yang menginginkan durasi merokok yang pas."
+    },
+    "toro-blue": {
+      "shortDesc": "Ukuran legendaris untuk sesi merokok yang santai namun berkelas.",
+      "description": "Toro Blue Gold memberikan volume asap yang melimpah dan profil rasa krimi yang khas."
+    },
+    "torpedo-blue": {
+      "shortDesc": "Elegansi torpedo dengan fokus rasa yang presisi.",
+      "description": "Torpedo Blue Gold menggabungkan pembakaran yang sempurna dengan aliran asap yang terkonsentrasi."
+    },
+    "cigarillos-red": {
+      "shortDesc": "Kenikmatan premium dalam format ringkas untuk momen singkat Anda.",
+      "description": "Cigarillos Red Gold membawa kualitas tembakau premium Montenegro ke dalam ukuran yang lebih kecil."
+    },
+    "gorditto-red": {
+      "shortDesc": "Kecil namun perkasa, dengan ring gauge besar untuk karakter asap yang tebal.",
+      "description": "Gorditto adalah tentang volume. Meskipun pendek, ring gauge-nya yang besar memungkinkan sensasi merokok yang penuh."
+    },
+    "petit-corona-red": {
+      "shortDesc": "Proporsi klasik untuk rasa yang berani.",
+      "description": "Petit Corona Red Gold adalah tentang intensitas. Dengan ring gauge yang lebih kecil, ia menonjolkan aroma wrapper."
+    },
+    "bomba-white": {
+      "shortDesc": "Ledakan rasa yang unik dan tak terduga, koleksi terbatas bagi kolektor.",
+      "description": "Bomba dirancang untuk memberikan kejutan pada setiap tahap pembakaran."
+    },
+    "crucero-white": {
+      "shortDesc": "Simbol petualangan rasa lintas samudera tembakau.",
+      "description": "Crucero menghadirkan perpaduan tembakau dari berbagai daerah."
+    },
+    "el-jefe-white": {
+      "shortDesc": "Sang Pemimpin di kelasnya, ukuran besar untuk kepuasan yang tahan lama.",
+      "description": "El Jefe (The Boss) adalah cigar yang menuntut perhatian. Dengan ukuran yang dominan, ia menawarkan perjalanan rasa yang panjang."
+    }
+  }
+}
