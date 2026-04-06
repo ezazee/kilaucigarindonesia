@@ -17,9 +17,20 @@ const baseDomain = process.env.NEXT_PUBLIC_SITE_URL ||
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseDomain),
-  title: "Kilau Cigar Indonesia | Cerutu Premium & Eksklusif",
+  title: {
+    template: "%s | Kilau Cigar Indonesia",
+    default: "Kilau Cigar Indonesia | Cerutu Premium & Eksklusif",
+  },
   description: "Kilau Cigar Indonesia menyajikan koleksi cerutu premium terbaik dengan tradisi lebih dari 100 tahun. Jelajahi Seri Montenegro, Black Gold, dan koleksi eksklusif lainnya.",
-  keywords: "cigar indonesia, cerutu premium, montenegro cigar, black gold collection, cerutu lintingan tangan, tembakau nicaragua",
+  keywords: "cigar indonesia, cerutu premium, montenegro cigar, black gold collection, cerutu lintingan tangan, tembakau nicaragua, premium cigars, exclusive tobacco",
+  authors: [{ name: "Kilau Cigar Indonesia" }],
+  creator: "Kilau Cigar Indonesia",
+  publisher: "Kilau Cigar Indonesia",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     title: "Kilau Cigar Indonesia | Cerutu Premium & Eksklusif",
     description: "Warisan Tradisi Cerutu Premium Selama 100 Tahun",
@@ -36,11 +47,46 @@ export const metadata: Metadata = {
     locale: "id_ID",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kilau Cigar Indonesia | Cerutu Premium & Eksklusif",
+    description: "Warisan Tradisi Cerutu Premium Selama 100 Tahun",
+    images: ["/images/hero.png"],
+  },
   icons: {
-    icon: "/favicon/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: [
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon.ico" },
+    ],
+    apple: [
+      { url: "/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      { rel: "mask-icon", url: "/favicon/favicon-32x32.png", color: "#A80B22" },
+    ],
+  },
+  manifest: "/favicon/site.webmanifest",
+  alternates: {
+    canonical: "/",
+    languages: {
+      "id-ID": "/id",
+      "en-US": "/en",
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
+
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";

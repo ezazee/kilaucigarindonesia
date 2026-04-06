@@ -20,8 +20,31 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default function Home() {
   const t = useTranslations('Home');
+  
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Kilau Cigar Indonesia",
+    "url": "https://kilaucigarindonesia.com",
+    "logo": "https://kilaucigarindonesia.com/favicon/apple-touch-icon.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+62-811-2007-8910",
+      "contactType": "sales",
+      "areaServed": "ID",
+      "availableLanguage": ["id", "en"]
+    },
+    "sameAs": [
+      "https://www.instagram.com/kilaucigarindonesia"
+    ]
+  };
+
   return (
     <div className="selection:bg-secondary/30 bg-[#050505]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section - Redesigned with Balanced Spacing */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
         <div className="absolute inset-0 z-0">
