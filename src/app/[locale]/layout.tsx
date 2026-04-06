@@ -12,15 +12,18 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
 });
 
+const baseDomain = process.env.NEXT_PUBLIC_SITE_URL || 
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kilaucigarindonesia.com"),
+  metadataBase: new URL(baseDomain),
   title: "Kilau Cigar Indonesia | Cerutu Premium & Eksklusif",
   description: "Kilau Cigar Indonesia menyajikan koleksi cerutu premium terbaik dengan tradisi lebih dari 100 tahun. Jelajahi Seri Montenegro, Black Gold, dan koleksi eksklusif lainnya.",
   keywords: "cigar indonesia, cerutu premium, montenegro cigar, black gold collection, cerutu lintingan tangan, tembakau nicaragua",
   openGraph: {
     title: "Kilau Cigar Indonesia | Cerutu Premium & Eksklusif",
     description: "Warisan Tradisi Cerutu Premium Selama 100 Tahun",
-    url: "https://kilaucigarindonesia.com",
+    url: baseDomain,
     siteName: "Kilau Cigar Indonesia",
     images: [
       {

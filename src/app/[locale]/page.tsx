@@ -9,11 +9,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'Home' });
 
   return {
-    title: `Kilau Cigar Indonesia - ${t('heroTitle')}`,
-    description: t('heroDesc').substring(0, 160),
+    title: `Kilau Cigar Indonesia | Cerutu Premium & Eksklusif`,
+    description: `Kilau Cigar Indonesia menyajikan koleksi cerutu premium terbaik dengan tradisi lebih dari 100 tahun. ${t('heroDesc').substring(0, 100)}...`,
     openGraph: {
-      title: `Kilau Cigar Indonesia - ${t('heroTitle')}`,
-      description: t('heroDesc').substring(0, 160),
+      title: `Kilau Cigar Indonesia | Cerutu Premium & Eksklusif`,
+      description: `Kilau Cigar Indonesia menyajikan koleksi cerutu premium terbaik dengan tradisi lebih dari 100 tahun. ${t('heroDesc').substring(0, 100)}...`,
     }
   };
 }
@@ -40,7 +40,7 @@ export default function Home() {
         <div className="relative z-20 container mx-auto px-8 flex flex-col items-center text-center">
           <div className="animate-fade-in-up max-w-5xl">
             {/* Top Badge */}
-            <span className="text-[#C8102E] tracking-[0.5em] uppercase text-[10px] md:text-xs font-black block mb-4">
+            <span className="text-[#A80B22] tracking-[0.5em] uppercase text-[10px] md:text-xs font-black block mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
               {t('heroBadge')}
             </span>
 
@@ -49,7 +49,7 @@ export default function Home() {
               <h1 className="text-5xl sm:text-7xl md:text-9xl font-serif font-bold text-white tracking-tight">
                 {t('heroTitle')}
               </h1>
-              <span className="text-[#C8102E] text-4xl sm:text-6xl md:text-8xl font-serif italic -mt-2 md:-mt-8">
+              <span className="text-[#A80B22] text-4xl sm:text-6xl md:text-8xl font-serif italic -mt-2 md:-mt-8 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 {t('heroEdition')}
               </span>
             </div>
