@@ -19,10 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       select: { slug: true, updatedAt: true },
     }),
     prisma.page.findMany({ select: { slug: true, updatedAt: true } }),
-  ]).catch((err) => {
-    console.error("[sitemap] DB query failed:", err);
-    throw err;
-  });
+  ]);
 
   const pageUpdatedAt = new Map(pages.map((p) => [p.slug, p.updatedAt]));
   const now = new Date();
