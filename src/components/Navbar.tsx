@@ -5,12 +5,20 @@ import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname } from "@/lib/navigation";
 
-export default function Navbar() {
+export default function Navbar({ instagramUrl, whatsappNumber }: { instagramUrl?: string; whatsappNumber: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [prevPathname, setPrevPathname] = useState<string | null>(null);
   const t = useTranslations("Navbar");
   const locale = useLocale();
   const pathname = usePathname();
+
+  // Close menu on path change (adjusting state during render, per React docs,
+  // avoids the cascading-render setState-in-effect anti-pattern)
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    if (isMenuOpen) setIsMenuOpen(false);
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,11 +27,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Close menu on path change
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [pathname]);
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -217,8 +220,10 @@ export default function Navbar() {
             <div className="space-y-4">
               <p className="text-[9px] text-zinc-600 uppercase tracking-widest">&copy; 2024 Kilau Cigar Indonesia</p>
               <div className="flex gap-6">
-                <a href="https://instagram.com/kilaucigarindonesia" target="_blank" rel="noopener noreferrer" className="text-[10px] text-secondary font-bold uppercase tracking-widest">Instagram</a>
-                <a href="https://wa.me/6281120078910" target="_blank" rel="noopener noreferrer" className="text-[10px] text-secondary font-bold uppercase tracking-widest">WhatsApp</a>
+                {instagramUrl && (
+                  <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="text-[10px] text-secondary font-bold uppercase tracking-widest">Instagram</a>
+                )}
+                <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="text-[10px] text-secondary font-bold uppercase tracking-widest">WhatsApp</a>
               </div>
             </div>
           </div>

@@ -1,0 +1,138 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  SUPERADMIN
+  EDITOR
+}
+
+enum StockStatus {
+  READY
+  SOLD_OUT
+  DISCONTINUED
+}
+
+enum PackagingType {
+  SATUAN
+  CARD_BOX
+  WOODEN_BOX
+}
+
+enum PageStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      Role     @default(EDITOR)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  activityLogs ActivityLog[]
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  slug      String    @unique
+  order     Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  products  Product[]
+}
+
+model Product {
+  id             String      @id @default(cuid())
+  slug           String      @unique
+  nameId         String
+  nameEn         String
+  shortDescId    String
+  shortDescEn    String
+  descriptionId  String
+  descriptionEn  String
+  length         String?
+  ring           String?
+  shape          String?
+  strengthId     String?
+  strengthEn     String?
+  wrapper        String?
+  binder         String?
+  filler         String?
+  stockStatus  StockStatus @default(READY)
+  published    Boolean     @default(true)
+  order        Int         @default(0)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  categoryId   String
+  category     Category    @relation(fields: [categoryId], references: [id])
+
+  variants     ProductVariant[]
+  images       Media[]
+}
+
+model ProductVariant {
+  id            String        @id @default(cuid())
+  packagingType PackagingType
+  qtyPerBox     Int?
+  price         Int
+  stockStatus   StockStatus   @default(READY)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  productId     String
+  product       Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  url       String
+  alt       String?
+  createdAt DateTime @default(now())
+
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+}
+
+model Page {
+  id         String     @id @default(cuid())
+  slug       String     @unique
+  titleId    String
+  titleEn    String
+  contentId  Json
+  contentEn  Json
+  status     PageStatus @default(DRAFT)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}
+
+model Setting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value Json
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  action    String
+  entity    String
+  entityId  String?
+  createdAt DateTime @default(now())
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}

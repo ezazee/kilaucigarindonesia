@@ -1,32 +1,102 @@
 import NextImage from "next/image";
 import { Link } from "@/lib/navigation";
-import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
+import { buildAlternates, truncateAtWord, getBaseUrl } from '@/lib/seo';
+import { prisma } from '@/lib/prisma';
+import { pickLocale, categoryFallbackIcon, orderProductGallery, isBoxImage } from '@/lib/product-helpers';
+import { getPageField, getPageImage } from '@/lib/page-content';
+import { getGeneralSettings } from '@/lib/settings-cache';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Home' });
+  const { siteDescription } = await getGeneralSettings();
+  // No `title` here on purpose: the root layout's admin-driven default title
+  // already IS the homepage title, so setting one here would just duplicate
+  // the brand name via the "%s | Kilau Cigar Indonesia" template.
+  const description = siteDescription || truncateAtWord(t('heroDesc'), 160);
 
   return {
-    title: `Kilau Cigar Indonesia | Cerutu Premium & Eksklusif`,
-    description: `Kilau Cigar Indonesia menyajikan koleksi cerutu premium terbaik dengan tradisi lebih dari 100 tahun. ${t('heroDesc').substring(0, 100)}...`,
-    openGraph: {
-      title: `Kilau Cigar Indonesia | Cerutu Premium & Eksklusif`,
-      description: `Kilau Cigar Indonesia menyajikan koleksi cerutu premium terbaik dengan tradisi lebih dari 100 tahun. ${t('heroDesc').substring(0, 100)}...`,
-    }
+    description,
+    alternates: buildAlternates('', locale),
+    openGraph: { description },
   };
 }
 
-export default function Home() {
-  const t = useTranslations('Home');
-  
+// No searchParams/cookies used on this route, so ISR can cache the rendered
+// HTML for 5 minutes instead of hitting Postgres on every visit; admin
+// mutations (products, categories) call revalidatePath so edits show sooner.
+export const revalidate = 300;
+
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Home' });
+  const homePage = await prisma.page.findUnique({ where: { slug: 'home' } });
+  const f = (key: string) => getPageField(homePage, key, locale, t(key));
+  const heroImage = getPageImage(homePage, 'heroImage', '/images/hero.png');
+  const legacyImage = getPageImage(homePage, 'legacyImage', '/uploads/products/black-toro-serie-s-box.png');
+  const differenceImage = getPageImage(homePage, 'differenceImage', '/uploads/products/black-comandante-serie-e-cardbox.png');
+  const smokingImage = getPageImage(homePage, 'smokingImage', '/uploads/products/blue-gran-robusto-box.png');
+
+  const recommended = await prisma.product.findMany({
+    where: { published: true, stockStatus: 'READY' },
+    orderBy: { order: 'asc' },
+    take: 6,
+    select: {
+      slug: true,
+      nameId: true,
+      nameEn: true,
+      images: { select: { url: true, alt: true } },
+      category: { select: { slug: true } },
+    },
+  });
+
+  const recommendedProducts = recommended.map((p) => ({
+    name: pickLocale(p.nameId, p.nameEn, locale),
+    img: orderProductGallery(p.images)[0]?.url ?? categoryFallbackIcon(p.category.slug),
+    slug: p.slug,
+  }));
+
+  const categories = await prisma.category.findMany({
+    orderBy: { order: 'asc' },
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      products: {
+        where: { published: true },
+        orderBy: { order: 'asc' },
+        take: 1,
+        select: { images: { select: { url: true, alt: true } } },
+      },
+    },
+  });
+
+  const collectionCards = categories.map((c) => {
+    const flagshipImages = c.products[0]?.images ?? [];
+    const boxPhoto = flagshipImages.find((img) => isBoxImage(img));
+    const anyPhoto = flagshipImages[0];
+    return {
+      name: c.name,
+      slug: c.slug,
+      img: boxPhoto?.url ?? anyPhoto?.url ?? categoryFallbackIcon(c.slug),
+    };
+  });
+
+  const COLLECTION_SUBTITLES: Record<string, string> = {
+    'black-gold': 'Ultra-Premium',
+    'blue-gold': 'Premium',
+    'red-gold': 'Premium Short Smokes',
+    'white-gold': 'Limited Edition',
+  };
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Kilau Cigar Indonesia",
-    "url": "https://kilaucigarindonesia.com",
-    "logo": "https://kilaucigarindonesia.com/favicon/apple-touch-icon.png",
+    "url": getBaseUrl(),
+    "logo": `${getBaseUrl()}/favicon/apple-touch-icon.png`,
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+62-811-2007-8910",
@@ -49,7 +119,7 @@ export default function Home() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-black">
         <div className="absolute inset-0 z-0">
           <NextImage
-            src="/images/hero.png"
+            src={heroImage}
             alt="Latar belakang mewah Kilau Cigar Indonesia"
             fill
             className="object-cover opacity-60 contrast-125 brightness-75 scale-110"
@@ -64,22 +134,22 @@ export default function Home() {
           <div className="animate-fade-in-up max-w-5xl">
             {/* Top Badge */}
             <span className="text-[#A80B22] tracking-[0.5em] uppercase text-[10px] md:text-xs font-black block mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-              {t('heroBadge')}
+              {f('heroBadge')}
             </span>
 
             {/* Main Heading Group - Adaptive for Mobile */}
             <div className="flex flex-col items-center leading-none">
               <h1 className="text-5xl sm:text-7xl md:text-9xl font-serif font-bold text-white tracking-tight">
-                {t('heroTitle')}
+                {f('heroTitle')}
               </h1>
               <span className="text-[#A80B22] text-4xl sm:text-6xl md:text-8xl font-serif italic -mt-2 md:-mt-8 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                {t('heroEdition')}
+                {f('heroEdition')}
               </span>
             </div>
 
             {/* Description - Balanced for Mobile */}
             <p className="text-white/80 font-light tracking-wide max-w-2xl mx-auto leading-relaxed text-xs md:text-base pt-8 md:pt-12 px-4 md:px-0">
-              {t('heroDesc')}
+              {f('heroDesc')}
             </p>
 
             {/* Button Actions - Adaptive Layout */}
@@ -88,13 +158,13 @@ export default function Home() {
                 href="/produk"
                 className="w-full sm:w-auto px-10 md:px-12 py-4 md:py-5 bg-[#C8102E] text-white hover:bg-white hover:text-black transition-all duration-500 shadow-xl text-center"
               >
-                {t('explore')}
+                {f('explore')}
               </Link>
               <Link
                 href="/tentang-kami"
                 className="w-full sm:w-auto px-10 md:px-12 py-4 md:py-5 border border-white/20 bg-black/40 text-white hover:border-white hover:bg-white/10 transition-all duration-500 text-center"
               >
-                {t('about')}
+                {f('about')}
               </Link>
             </div>
           </div>
@@ -106,14 +176,14 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-8 text-center space-y-10 relative z-10">
           <div className="space-y-6">
             <h2 className="text-5xl md:text-6xl font-serif font-bold text-[#C5A059] leading-tight whitespace-pre-line">
-              {t('traditionTitle')}
+              {f('traditionTitle')}
             </h2>
             <div className="flex justify-center">
               <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#C5A059] to-transparent"></div>
             </div>
           </div>
           <p className="text-zinc-500 font-light leading-relaxed text-lg max-w-2xl mx-auto">
-            {t('traditionDesc')}
+            {f('traditionDesc')}
           </p>
         </div>
       </section>
@@ -129,17 +199,12 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-            {[
-              { name: "Black Gold Collection", slug: "black-gold", img: "/images/icons/black.png", subtitle: "Ultra-Premium" },
-              { name: "Blue Gold Collection", slug: "blue-gold", img: "/images/icons/blue.png", subtitle: "Premium" },
-              { name: "Red Gold Collection", slug: "red-gold", img: "/images/icons/red.png", subtitle: "Premium Short Smokes" },
-              { name: "White Gold Collection", slug: "white-gold", img: "/images/icons/white.png", subtitle: "Limited Edition" }
-            ].map((item, i) => (
-              <Link key={i} href={`/montenegro/${item.slug}`} className="group text-center space-y-6 md:space-y-8">
+            {collectionCards.map((item) => (
+              <Link key={item.slug} href={`/montenegro/${item.slug}`} className="group text-center space-y-6 md:space-y-8">
                 <div className="relative aspect-square bg-[#0a0a0a] border border-white/5 group-hover:border-secondary/30 transition-all duration-700 overflow-hidden rounded-sm">
                   <NextImage
                     src={item.img}
-                    alt={`${item.name} - ${item.subtitle}`}
+                    alt={`${item.name} - ${COLLECTION_SUBTITLES[item.slug] ?? ''}`}
                     fill
                     className="object-contain p-6 md:p-8 group-hover:scale-110 transition-transform duration-1000"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 20vw"
@@ -148,7 +213,7 @@ export default function Home() {
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-white font-serif font-bold text-base md:text-lg group-hover:text-secondary transition-colors duration-300">{item.name}</h3>
-                  <p className="text-zinc-600 text-[9px] md:text-[10px] uppercase tracking-widest font-bold">{item.subtitle}</p>
+                  <p className="text-zinc-600 text-[9px] md:text-[10px] uppercase tracking-widest font-bold">{COLLECTION_SUBTITLES[item.slug] ?? ''}</p>
                 </div>
               </Link>
             ))}
@@ -160,8 +225,8 @@ export default function Home() {
       <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-black mt-[-1px]">
         <div className="absolute inset-0 z-0">
           <NextImage
-            src="/images/gentleman_legacy.png"
-            alt="Pria menikmati cerutu - Warisan Tembakau Asli"
+            src={legacyImage}
+            alt="Toro Especial Serie S - Warisan Tembakau Asli Montenegro"
             fill
             className="object-cover opacity-60 grayscale brightness-75 scale-110"
             priority
@@ -174,19 +239,19 @@ export default function Home() {
         <div className="relative z-10 container mx-auto px-8">
           <div className="max-w-xl space-y-8 animate-fade-in-up">
             <div className="space-y-4">
-              <h3 className="text-secondary font-bold uppercase tracking-[0.4em] text-xs">{t('legacyTitle')}</h3>
+              <h3 className="text-secondary font-bold uppercase tracking-[0.4em] text-xs">{f('legacyTitle')}</h3>
               <h2 className="text-5xl md:text-6xl font-serif font-bold text-white leading-tight uppercase">
-                {t('legacyTitle')} <br /> <span className="italic text-secondary">{t('legacySubtitle')}</span>
+                {f('legacyTitle')} <br /> <span className="italic text-secondary">{f('legacySubtitle')}</span>
               </h2>
             </div>
 
             <p className="text-zinc-400 text-lg font-light leading-loose">
-              {t('legacyDesc')}
+              {f('legacyDesc')}
             </p>
 
             <div>
               <Link href="/produk" className="inline-flex items-center gap-4 bg-white text-black px-8 md:px-10 py-4 md:py-5 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-secondary hover:text-white transition-all duration-500">
-                {t('ctaFind')}
+                {f('ctaFind')}
               </Link>
             </div>
           </div>
@@ -198,27 +263,26 @@ export default function Home() {
         <div className="container mx-auto px-8">
           <div className="grid md:grid-cols-2 gap-12 md:gap-24 items-center">
             {/* Image Left */}
-            <div className="relative aspect-square md:aspect-[4/3] rounded-sm overflow-hidden group shadow-2xl border border-white/5">
+            <div className="relative aspect-square md:aspect-[4/3] rounded-sm overflow-hidden group shadow-2xl border border-white/5 bg-[#0a0a0a]">
               <NextImage
-                src="/images/feature_box.png"
-                alt="Kotak Cerutu Montenegro Seleksi Premium"
+                src={differenceImage}
+                alt="Comandante Serie E - Kotak Cerutu Montenegro Black Gold"
                 fill
-                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                className="object-contain p-6 md:p-10 transition-transform duration-1000 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-transparent"></div>
             </div>
 
             {/* Text Right */}
             <div className="space-y-8">
               <div className="space-y-4">
                 <h2 className="text-4xl md:text-5xl font-serif text-[#C5A059] leading-tight whitespace-pre-line">
-                  {t('differenceTitle')}
+                  {f('differenceTitle')}
                 </h2>
                 <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C5A059] to-transparent"></div>
               </div>
               <p className="text-zinc-400 font-light leading-loose text-lg">
-                {t('differenceDesc')}
+                {f('differenceDesc')}
               </p>
               <div>
                 <Link href="/produk" className="inline-flex items-center gap-3 px-8 py-4 bg-secondary/10 border border-secondary text-secondary font-bold uppercase tracking-widest text-[10px] md:text-xs hover:bg-secondary hover:text-white transition-all duration-500 rounded-sm group">
@@ -241,12 +305,12 @@ export default function Home() {
             <div className="space-y-8 order-2 md:order-1">
               <div className="space-y-4">
                 <h2 className="text-4xl md:text-5xl font-serif text-[#C5A059] leading-tight whitespace-pre-line">
-                  {t('smokingExp')}
+                  {f('smokingExp')}
                 </h2>
                 <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C5A059] to-transparent"></div>
               </div>
               <p className="text-zinc-400 font-light leading-loose text-lg">
-                {t('smokingDesc')}
+                {f('smokingDesc')}
               </p>
               <div>
                 <Link href="/produk" className="inline-flex items-center gap-3 px-8 py-4 bg-secondary/10 border border-secondary text-secondary font-bold uppercase tracking-widest text-[10px] md:text-xs hover:bg-secondary hover:text-white transition-all duration-300 rounded-sm group">
@@ -259,15 +323,14 @@ export default function Home() {
             </div>
 
             {/* Image Right */}
-            <div className="relative aspect-square md:aspect-[4/3] rounded-sm overflow-hidden order-1 md:order-2 group shadow-2xl border border-white/5">
+            <div className="relative aspect-square md:aspect-[4/3] rounded-sm overflow-hidden order-1 md:order-2 group shadow-2xl border border-white/5 bg-[#0a0a0a]">
               <NextImage
-                src="/images/collection_black.png"
-                alt="Koleksi Black Gold Montenegro - Pengalaman Merokok Terbaik"
+                src={smokingImage}
+                alt="Gran Robusto - Koleksi Blue Gold Montenegro"
                 fill
-                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                className="object-contain p-6 md:p-10 transition-transform duration-1000 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-transparent"></div>
             </div>
           </div>
         </div>
@@ -277,7 +340,7 @@ export default function Home() {
         <div className="container mx-auto px-8">
           <div className="text-center space-y-6 mb-20">
             <h2 className="text-4xl md:text-5xl font-serif text-[#C5A059] leading-tight whitespace-pre-line">
-              {t('recommended')}
+              {f('recommended')}
             </h2>
             <div className="flex justify-center">
               <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#C5A059] to-transparent"></div>
@@ -285,14 +348,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
-            {[
-              { name: "Bomba", img: "/images/products/bomba.png", slug: "bomba-white" },
-              { name: "Cigarillos", img: "/images/products/cigarillos.png", slug: "cigarillos-red" },
-              { name: "Comandante Serie E", img: "/images/icons/black.png", slug: "comandate-series-e" },
-              { name: "Crucero", img: "/images/products/crucero.png", slug: "crucero-white" },
-              { name: "El Jefe", img: "/images/products/eljefe.png", slug: "el-jefe-white" },
-              { name: "Gorditto", img: "/images/products/gorditto.png", slug: "gorditto-red" },
-            ].map((product, idx) => (
+            {recommendedProducts.map((product, idx) => (
               <Link key={idx} href={`/produk/${product.slug}`} className="group flex flex-col items-center space-y-6">
                 <div className="relative w-full aspect-square bg-[#111] border border-white/5 rounded-sm flex items-center justify-center p-12 transition-all duration-700 group-hover:border-secondary/30 group-hover:scale-105">
                   <div className="relative w-full h-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.6)]">

@@ -1,17 +1,18 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { buildAlternates } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'About' });
 
+  const description = t('tagline').substring(0, 160);
+
   return {
-    title: `Kilau Cigar Indonesia | ${t('badge')}`,
-    description: t('tagline').substring(0, 160),
-    openGraph: {
-      title: `Kilau Cigar Indonesia | ${t('badge')}`,
-      description: t('tagline').substring(0, 160),
-    }
+    title: t('badge'),
+    description,
+    alternates: buildAlternates('/tentang-kami', locale),
+    openGraph: { title: t('badge'), description },
   };
 }
 

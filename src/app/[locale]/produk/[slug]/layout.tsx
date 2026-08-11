@@ -1,30 +1,32 @@
 import { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
-import { ALL_PRODUCTS } from '@/lib/data/products';
-import { notFound } from 'next/navigation';
+import { prisma } from '@/lib/prisma';
+import { pickLocale, categoryFallbackIcon } from '@/lib/product-helpers';
+import { buildAlternates, truncateAtWord } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string, slug: string }> }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const t = await getTranslations({ locale });
-  const tSpecs = await getTranslations({ locale, namespace: 'ProductSpecs' });
-  
-  const product = ALL_PRODUCTS.find(p => p.slug === slug);
+
+  const product = await prisma.product.findUnique({
+    where: { slug },
+    include: { category: true, images: true },
+  });
   if (!product) return {};
 
-  const productName = product.name;
-  // Get localized description from messages using ProductsData namespace
-  const descriptionTranslationKey = `ProductsData.${slug}.description`;
-  const description = t(descriptionTranslationKey as any);
+  const productName = pickLocale(product.nameId, product.nameEn, locale);
+  const description = truncateAtWord(pickLocale(product.shortDescId, product.shortDescEn, locale), 160);
+  const img = product.images[0]?.url ?? categoryFallbackIcon(product.category.slug);
+  const title = `${productName} - ${product.category.name}`;
 
   return {
-    title: `Kilau Cigar Indonesia | ${productName} - ${product.category}`,
-    description: (description !== descriptionTranslationKey ? description : `Premium Kilau Cigar Indonesia: ${productName}`).substring(0, 160),
+    title,
+    description,
+    alternates: buildAlternates(`/produk/${slug}`, locale),
     openGraph: {
-      title: `${productName} - ${product.category} | Kilau Cigar Indonesia`,
-      description: (description !== descriptionTranslationKey ? description : `Premium Kilau Cigar Indonesia: ${productName}`).substring(0, 160),
+      title,
+      description,
       images: [
         {
-          url: product.img,
+          url: img,
           width: 800,
           height: 800,
           alt: `Cerutu Premium ${productName}`,

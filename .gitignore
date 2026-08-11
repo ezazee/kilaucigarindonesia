@@ -39,3 +39,28 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma
+
+# logs
+*.log
+
+# aaPanel / server-specific config (not part of the app, differs per server)
+.user.ini
+
+# user-uploaded media — runtime data on the server, not source code.
+# Committing this would bloat the repo and risk conflicts on `git pull`
+# once the admin dashboard's upload feature is actually used in production.
+/public/uploads
+
+# AI tool / editor-specific project folders — local config, not app source
+.agents/
+.claude/
+.freebuff/
+.windsurf/
+
+# Raw product reference material (docx/PDF catalogs, price lists) used to
+# seed the database — internal business documents, not meant to ship in
+# a public/production repo.
+/product_knowledge/
+PRODUCT_KNOWLEDGE.md

@@ -1,9 +1,26 @@
 import Image from "next/image";
 import { Link } from "@/lib/navigation";
-import { useTranslations } from "next-intl";
+import { getTranslations, getLocale } from "next-intl/server";
+import { getGeneralSettings } from "@/lib/settings-cache";
+import { IconInstagram, IconFacebook, IconYoutube, IconWhatsapp } from "./SocialIcons";
 
-export default function Footer() {
-  const t = useTranslations("Footer");
+export default async function Footer() {
+  const t = await getTranslations("Footer");
+  const locale = await getLocale();
+  const s = await getGeneralSettings();
+
+  const whatsapp = s.whatsappNumber || "6281120078910";
+  const email = s.contactEmail || "info@kilaucigarindonesia.com";
+  const officeLocation = s.officeLocation || t("officeLocation");
+  const description = (locale === "en" ? s.footerDescriptionEn : s.footerDescriptionId) || t("description");
+
+  const socials = [
+    { key: "IG", label: "Instagram", url: s.instagramUrl, Icon: IconInstagram },
+    { key: "FB", label: "Facebook", url: s.facebookUrl, Icon: IconFacebook },
+    { key: "YT", label: "YouTube", url: s.youtubeUrl, Icon: IconYoutube },
+    { key: "WA", label: "WhatsApp", url: whatsapp ? `https://wa.me/${whatsapp}` : undefined, Icon: IconWhatsapp },
+  ].filter((soc) => soc.url);
+
   return (
     <>
       <footer className="py-24 bg-black border-t border-white/5 relative">
@@ -11,38 +28,48 @@ export default function Footer() {
           <div className="space-y-8 col-span-1 md:col-span-2">
             <div className="flex flex-col gap-4">
               <Image 
-                src="/logo/kci-logo-png-300x175.png" 
-                alt="Logo Kilau Cigar Indonesia - Pilihan Cerutu Premium" 
-                width={120} 
-                height={70} 
-                className="brightness-125 object-contain" 
+                src="/logo/kci-logo-png-300x175.png"
+                alt="Logo Kilau Cigar Indonesia - Pilihan Cerutu Premium"
+                width={120}
+                height={70}
+                className="brightness-125 object-contain"
+                style={{ height: "auto" }}
                 sizes="120px"
               />
               <p className="text-zinc-500 font-light max-w-sm leading-relaxed text-sm">
-                {t("description")}
+                {description}
               </p>
             </div>
             <div className="flex gap-6">
-              {["IG", "FB", "YT", "WA"].map((social) => (
-                <a key={social} href="#" className="w-10 h-10 border border-white/10 rounded-none flex items-center justify-center text-[10px] font-bold text-zinc-500 hover:border-secondary hover:text-white transition-all">{social}</a>
+              {socials.map((social) => (
+                <a
+                  key={social.key}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="w-10 h-10 border border-white/10 rounded-none flex items-center justify-center text-zinc-500 hover:border-secondary hover:text-secondary transition-all"
+                >
+                  <social.Icon className="w-4 h-4" />
+                </a>
               ))}
             </div>
           </div>
-          
+
           <div className="space-y-8">
             <h4 className="text-white uppercase tracking-widest text-xs font-bold">{t("contactInfo")}</h4>
             <ul className="space-y-4 text-sm text-zinc-500 font-light">
               <li className="flex items-center gap-3">
-                <span className="text-secondary tracking-tight">WhatsApp:</span> 
-                <a href="https://wa.me/6281120078910" className="hover:text-white transition-colors">+62 811-2007-8910</a>
+                <span className="text-secondary tracking-tight">WhatsApp:</span>
+                <a href={`https://wa.me/${whatsapp}`} className="hover:text-white transition-colors">+{whatsapp}</a>
               </li>
               <li className="flex items-center gap-3">
-                <span className="text-secondary tracking-tight">Email:</span> 
-                <a href="mailto:info@kilaucigarindonesia.com" className="hover:text-white transition-colors">info@kilaucigarindonesia.com</a>
+                <span className="text-secondary tracking-tight">Email:</span>
+                <a href={`mailto:${email}`} className="hover:text-white transition-colors">{email}</a>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-secondary tracking-tight">{t("office")}:</span> 
-                <span className="leading-relaxed">{t("officeLocation")}</span>
+                <span className="text-secondary tracking-tight">{t("office")}:</span>
+                <span className="leading-relaxed">{officeLocation}</span>
               </li>
             </ul>
           </div>
@@ -65,9 +92,9 @@ export default function Footer() {
       </footer>
 
       {/* Floating WhatsApp Widget */}
-      <a 
-        href="https://wa.me/6281120078910" 
-        target="_blank" 
+      <a
+        href={`https://wa.me/${whatsapp}`}
+        target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-10 right-10 z-[100] group flex items-center gap-4"
       >
