@@ -1,19 +1,15 @@
 import { PrismaClient } from "@/generated/prisma/client";
-import { PrismaNeon } from "@prisma/adapter-neon";
-import { neonConfig } from "@neondatabase/serverless";
-import ws from "ws";
-
-// Node's runtime doesn't ship a WebSocket implementation compatible with
-// Neon's pooled-connection protocol (that's only true on edge/serverless
-// runtimes) — on a plain Node.js server this must be provided explicitly,
-// or every query fails with an opaque "ErrorEvent".
-neonConfig.webSocketConstructor = ws;
+import { PrismaPg } from "@prisma/adapter-pg";
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-const adapter = new PrismaNeon({
+// Plain TCP Postgres connection — this app runs on a persistent Node.js
+// server (not an edge/serverless runtime), so it doesn't need Neon's
+// WebSocket-based driver (which requires outbound WSS access that isn't
+// guaranteed on every VPS/firewall setup).
+const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL!,
 });
 
