@@ -13,6 +13,16 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  experimental: {
+    serverActions: {
+      // Behind the aaPanel/Nginx reverse proxy, `x-forwarded-host` isn't
+      // always set to the real domain (e.g. it can arrive as 127.0.0.1),
+      // which trips Next's Server Actions origin check. Explicitly
+      // allowing the real domain(s) here is more robust than relying on
+      // the proxy config alone.
+      allowedOrigins: ['kilaucigarindonesia.com', 'www.kilaucigarindonesia.com'],
+    },
+  },
   async headers() {
     return [
       {
